@@ -1,4 +1,4 @@
-module cherrytree
+module github.com/peterzh4ng/cherrytree-api
 
 go 1.18
 
