@@ -24,7 +24,7 @@ type Handle struct {
 	CtbFilepath string
 }
 
-func NewHandle(filepath, returnedImagePathPrefix string) *Handle {
+func NewHandle(filepath string) *Handle {
 	// 不打印sql
 	newLogger := logger.New(
 		log.StandardLogger(), // io writer
