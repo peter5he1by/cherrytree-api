@@ -9,7 +9,7 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"image"
+	"image/png"
 	"os"
 	"path"
 	"sort"
@@ -167,9 +167,9 @@ func (r Handle) GetNodeContentById(id int32, pathToSaveBinary *string) (*CtNodeC
 			}
 			// 不需要保存图片和嵌入式附件到磁盘
 			if pathToSaveBinary == nil {
-				if img.Filename != "" {
+				if img.Filename == "" {
 					// png
-					_png, _, err := image.DecodeConfig(bytes.NewReader(img.Png))
+					_png, err := png.DecodeConfig(bytes.NewReader(img.Png))
 					if err != nil {
 						return nil, err
 					}
@@ -191,20 +191,20 @@ func (r Handle) GetNodeContentById(id int32, pathToSaveBinary *string) (*CtNodeC
 				filename string
 				filepath string
 			)
-			if img.Filename != "" {
-				// embfile
-				filename = fmt.Sprintf("%d_%d%s", img.NodeId, img.Offset, path.Ext(img.Filename))
-				filepath = path.Join(*pathToSaveBinary, filename)
-				anchoredWidgets = append(anchoredWidgets, NewCtEmbFile(img, &filepath))
-			} else {
+			if img.Filename == "" {
 				// png
 				filename = fmt.Sprintf("%d_%d.png", img.NodeId, img.Offset)
 				filepath = path.Join(*pathToSaveBinary, filename)
-				_png, _, err := image.DecodeConfig(bytes.NewReader(img.Png))
+				_png, err := png.DecodeConfig(bytes.NewReader(img.Png))
 				if err != nil {
 					return nil, err
 				}
 				anchoredWidgets = append(anchoredWidgets, NewCtPng(img, _png.Width, _png.Height, &filepath))
+			} else {
+				// embfile
+				filename = fmt.Sprintf("%d_%d%s", img.NodeId, img.Offset, path.Ext(img.Filename))
+				filepath = path.Join(*pathToSaveBinary, filename)
+				anchoredWidgets = append(anchoredWidgets, NewCtEmbFile(img, &filepath))
 			}
 			// 写文件
 			file, err := os.OpenFile(filepath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
