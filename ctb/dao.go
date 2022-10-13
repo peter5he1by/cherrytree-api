@@ -6,7 +6,7 @@ import (
 
 func (r Handle) selectNodeMetaById(id int32) (ptNodeMeta, error) {
 	var nm ptNodeMeta
-	result := r.db.Model(&ptNodeMeta{}).Where("node_id = ?", id).Take(&nm)
+	result := r.db.Model(&tNode{}).Where("node_id = ?", id).Take(&nm)
 	return nm, result.Error
 }
 
