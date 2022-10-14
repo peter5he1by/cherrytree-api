@@ -8,24 +8,24 @@ type XmlDocument struct {
 }
 
 type XmlRichText struct {
-	Foreground string `xml:"foreground,attr" json:"foreground,omitempty"`
-	Background string `xml:"background,attr" json:"background,omitempty"`
+	Foreground string `xml:"foreground,attr,omitempty" json:"foreground,omitempty"`
+	Background string `xml:"background,attr,omitempty" json:"background,omitempty"`
 	// 加粗 heavy
-	Weight string `xml:"weight,attr" json:"weight,omitempty"`
+	Weight string `xml:"weight,attr,omitempty" json:"weight,omitempty"`
 
-	Style string `xml:"style,attr" json:"style,omitempty"`
+	Style string `xml:"style,attr,omitempty" json:"style,omitempty"`
 	// 下划线 single
-	Underline string `xml:"underline,attr" json:"underline,omitempty"`
+	Underline string `xml:"underline,attr,omitempty" json:"underline,omitempty"`
 	// 删除线 true
-	Strikethrough string `xml:"strikethrough,attr" json:"strikethrough,omitempty"`
+	Strikethrough string `xml:"strikethrough,attr,omitempty" json:"strikethrough,omitempty"`
 	// 标题、上下标 h1-h6 | sup | sub
-	Scale string `xml:"scale,attr" json:"scale,omitempty"`
+	Scale string `xml:"scale,attr,omitempty" json:"scale,omitempty"`
 	// 等宽 monospace
-	Family string `xml:"family,attr" json:"family,omitempty"`
+	Family string `xml:"family,attr,omitempty" json:"family,omitempty"`
 	// 超链接 file folder webs
-	Link          string `xml:"link,attr" json:"link,omitempty"`
-	Justification string `xml:"justification,attr" json:"justification,omitempty"`
-	Indent        int32  `xml:"indent,attr" json:"indent,omitempty"`
+	Link          string `xml:"link,attr,omitempty" json:"link,omitempty"`
+	Justification string `xml:"justification,attr,omitempty" json:"justification,omitempty"`
+	Indent        int32  `xml:"indent,attr,omitempty" json:"indent,omitempty"`
 	Text          string `xml:",chardata" json:"text"`
 }
 
