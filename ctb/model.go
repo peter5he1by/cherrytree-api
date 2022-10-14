@@ -92,10 +92,14 @@ func NewCtText(x *XmlRichText) *CtText {
 		Type:        CtDocElementText,
 		XmlRichText: *x,
 	}
-	runes := []rune(t.XmlRichText.Background)
-	t.Background = string(append(append(runes[0:3], runes[5:7]...), runes[9:11]...)) // #eded33333b3b 不知道为什么是这种格式
-	runes = []rune(t.XmlRichText.Foreground)
-	t.Foreground = string(append(append(runes[0:3], runes[5:7]...), runes[9:11]...))
+	if t.Foreground != "" {
+		runes := []rune(t.XmlRichText.Background)
+		t.Background = string(append(append(runes[0:3], runes[5:7]...), runes[9:11]...)) // #eded33333b3b 不知道为什么是这种格式
+	}
+	if t.Background != "" {
+		runes := []rune(t.XmlRichText.Foreground)
+		t.Foreground = string(append(append(runes[0:3], runes[5:7]...), runes[9:11]...))
+	}
 	return t
 }
 
