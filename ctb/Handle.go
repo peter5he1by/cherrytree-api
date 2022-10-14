@@ -348,7 +348,7 @@ func (r Handle) GetNodeContentById(id int32, pathToSaveBinary *string) (*CtNodeC
 					resultSet[currentLineIndex] = append(resultSet[currentLineIndex], &leftText)
 					chars = offset
 					// 拼接 anchored widget
-					resultSet[currentLineIndex] = append(resultSet[currentLineIndex], &anchoredWidgets[0])
+					resultSet[currentLineIndex] = append(resultSet[currentLineIndex], anchoredWidgets[0])
 					anchoredWidgets = anchoredWidgets[1:]
 					chars++
 					// 右半部分推回去，假装什么都没发生
