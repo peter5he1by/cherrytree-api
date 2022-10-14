@@ -371,3 +371,30 @@ func (r Handle) GetNodeContentById(id int32, pathToSaveBinary *string) (*CtNodeC
 
 	return &ret, nil
 }
+
+func (r Handle) GetNodeListFromRoot(id int32) ([]*CtNode, error) {
+	var ret []*CtNode
+	// 放在最后
+	n, err := r.GetNodeById(id)
+	if err != nil {
+		return nil, err
+	}
+	ret = append(ret, n)
+	// 开始找父节点
+	c, err := r.selectChildrenByNodeId(id)
+	if err != nil {
+		return nil, err
+	}
+	for c.FatherId != 0 {
+		n, err := r.GetNodeById(c.FatherId)
+		if err != nil {
+			return nil, err
+		}
+		ret = append([]*CtNode{n}, ret...)
+		c, err = r.selectChildrenByNodeId(c.FatherId)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return ret, nil
+}
